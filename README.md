@@ -6,6 +6,10 @@ A web-based drawing tool for chemical structures.
 
 ![](https://github.com/craigmateo/chemistry-drawing/blob/main/assets/screenshot.jpg)
 
+## Text Menu
+
+![](https://github.com/craigmateo/chemistry-drawing/blob/main/assets/screenshot1.jpg)
+
 ## Description
 
 A Javascript based web application for drawing chemical structures. Built using Fabric.js.

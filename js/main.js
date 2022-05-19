@@ -7,15 +7,10 @@ jQuery(window).on("load", function() {
     canvas = new fabric.Canvas('a');
     canvas.perPixelTargetFind = true;
     canvas.targetFindTolerance = 4;
-    document.getElementById('tofront').addEventListener("click", enviarFrente);
-    document.getElementById('toback').addEventListener("click", enviarFondo);
-    document.getElementById('toAdelante').addEventListener("click", moverAdelante);
-    document.getElementById('toAtras').addEventListener("click", enviarAtras);
 });
 
 function addHex() {
-    4
-    mode = "shape";
+    var mode = "shape";
     var id = Date.now();
     var points = regularPolygonPoints(6, 50);
     var myPoly = new fabric.Polygon(points, {
@@ -115,7 +110,7 @@ function addText() {
     let text = new fabric.IText('Text', {
         left: this.canvas.width / 2,
         top: this.canvas.height / 2,
-        fill: 'red',
+        fill: 'black',
         fontFamily: 'sans-serif',
         fontSize: 20,
         hasRotatingPoint: false,
