@@ -30,7 +30,8 @@ Basic functionality:
 
 ### Installing
 
-* For Mobius, download the zip in the `mobius` subfolder. The Import to Mobius will be an html question.
+* For Mobius, download the zip in the `mobius` subfolder. The import to Mobius will be an html question.
+* For the text-based menu simply use `index-textMenu.html`.
 
 ## Version History
 
