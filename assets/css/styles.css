@@ -1,0 +1,98 @@
+canvas {
+    border: 2px solid lightgray;
+    width: 100%;
+    margin-top: 0;
+    cursor: default;
+}
+
+.container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 560px;
+    margin-top: 5rem;
+}
+
+.button-container {
+    display: block;
+    margin: auto;
+    font-size: 0;
+}
+
+.button,
+.custom-file-upload {
+    background-color: #03A9F4;
+    border: 1px solid grey;
+    padding: 10px 10px;
+    text-transform: uppercase;
+    color: white;
+    width: 40px;
+    height: 40px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.custom-file-upload {
+    padding: 26px 10px 12px 12px;
+}
+
+.custom-file-upload:hover,
+.custom-file-upload:focus {
+    background-color: #0074a9;
+    outline: none;
+}
+
+.button:hover,
+.button:focus {
+    background-color: #0074a9;
+    outline: none;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.btn-secondary {
+    background: lightgrey;
+    color: black;
+    margin-top: 1rem;
+}
+
+.order {
+    border: none;
+    padding: 10px 10px;
+}
+
+#context-menu {
+    position: fixed;
+    z-index: 10000;
+    width: 150px;
+    background: #1b1a1a;
+    border-radius: 5px;
+    transform: scale(0);
+    transform-origin: top left;
+    display: none;
+}
+
+#context-menu.visible {
+    display: block;
+    transform: scale(1);
+    transition: transform 200ms ease-in-out;
+}
+
+#context-menu .item {
+    padding: 8px 10px;
+    font-size: 15px;
+    color: #eee;
+    cursor: pointer;
+    border-radius: inherit;
+}
+
+#context-menu .item:hover {
+    background: #343434;
+}
+
+#context-menu.visible {
+    transform: scale(1);
+    transition: transform 200ms ease-in-out;
+}
