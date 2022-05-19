@@ -13,46 +13,34 @@
 <body>
     <div class="container">
         <div class="button-container" id="button-container">
-            <button id="button-draw" class="button" onclick='startDraw()'><img src="assets/svg/draw.svg" /> Draw</button>
-            <button id="button-clear" class="button" onclick='clearCanvas()'><img src="assets/svg/clear-all.svg" /> Clear All</button>
-            <button id="button-select" class="button" onclick='select()'><img src="assets/svg/select.svg" /> Select</button>
-            <button id="button-hex" class="button" onclick='addHex()'><img src="assets/svg/hexagon.svg" /> Hexagon</button>
-            <button id="button-cir" class="button" onclick='addCircle()'><img src="assets/svg/circle.svg" /> Circle</button>
-            <button id="button-tri" class="button" onclick='addTriangle()'><img src="assets/svg/triangle.svg" /> Triangle</button>
-            <button id="button-rec" class="button" onclick='addRect()'><img src="assets/svg/rectangle.svg" /> Rectangle</button>
-            <button id="button-line" class="button" onclick='addSingle()'><img src="assets/svg/single-bond.svg" /> Single Bond</button>
-            <button id="button-line" class="button" onclick='addDouble()'><img src="assets/svg/double-bond.svg" /> Double Bond</button>
-            <button id="button-line" class="button" onclick='addWedge()'><img src="assets/svg/wedge.svg" /> Wedge</button>
-            <button id="button-line" class="button" onclick='addWedgeDash()'><img src="assets/svg/wedge-dash.svg" /> Wedge Dash</button>
-            <button id="button-line" class="button" onclick='addText()'><img src="assets/svg/text.svg" /> Text</button>
-            <br>
-            <div layout="row">
-                <button class="button order" id="toAdelante">+
-            <tooltip md-direction="bottom">Bring forward</tooltip>
-          </button>
-                <button class="button order" id="tofront">++
-            <tooltip md-direction="bottom">Bring to front</tooltip>
-          </button>
-                <button class="button order" id="toAtras">-
-            <tooltip md-direction="bottom">Send backwards</tooltip>
-          </button>
-                <button class="button order" id="toback">--
-            <tooltip md-direction="bottom">Send to back</tooltip>
-          </button>
-            </div>
-
-            <button id="button-save" class="btn btn-secondary" onclick='saveCanvas()' style="display:none;">Save</button>
-
+            <button id="button-draw" class="button" onclick='startDraw()' title="Draw"><img src="assets/svg/draw.svg" /> </button>
+            <button id="button-clear" class="button" onclick='clearCanvas()' title="Clear All"><img src="assets/svg/clear-all.svg" /></button>
+            <button id="button-select" class="button" onclick='select()' title="Select"><img src="assets/svg/select.svg" /> </button>
+            <button id="button-hex" class="button" onclick='addHex()' title="Hexagon"><img src="assets/svg/hexagon.svg" /></button>
+            <button id="button-pent" class="button" onclick='addPent()' title="Pentagon"><img src="assets/svg/circle.svg" /></button>
+            <button id="button-tri" class="button" onclick='addTriangle()' title="Triangle"><img src="assets/svg/triangle.svg" /></button>
+            <button id="button-rec" class="button" onclick='addRect()' title="Rectangle"><img src="assets/svg/rectangle.svg" /></button>
+            <button id="button-line" class="button" onclick='addSingle()' title="Single Bond"><img src="assets/svg/single-bond.svg" /></button>
+            <button id="button-line" class="button" onclick='addDouble()' title="Double Bond"><img src="assets/svg/double-bond.svg" /></button>
+            <button id="button-line" class="button" onclick='addTriple()' title="Triple Bond"><img src="assets/svg/triple-bond.svg" /></button>
+            <button id="button-line" class="button" onclick='addWedge()' title="Wedge"><img src="assets/svg/wedge.svg" /></button>
+            <button id="button-line" class="button" onclick='addWedgeDash()' title="Wedge Dash"><img src="assets/svg/wedge-dash.svg" /></button>
+            <button id="button-line" class="button" onclick='addText()' title="Text"><img src="assets/svg/text.svg" /></button>
+            <button id="button-save" class="button" onclick='saveCanvas()' style="display:none;">Save</button>
             <input id="filereader" type="file" accept="image/*" />
-
-            <label for="filereader" class="btn btn-secondary">
-               Upload
+            <label for="filereader" class="custom-file-upload" title="Upload Image">
+                <img src="assets/svg/image.svg" />
             </label>
-
-
         </div>
 
-        <canvas id="a" width="600px" height="500"></canvas>
+        <div id="context-menu">
+            <div class="item" id="toAdelante">Bring forward</div>
+            <div class="item" id="tofront">Bring to front</div>
+            <div class="item" id="toAtras">Send backwards</div>
+            <div class="item" id="toback">Send to back</div>
+        </div>
+
+        <canvas id="a" width="557px" height="500"></canvas>
 
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

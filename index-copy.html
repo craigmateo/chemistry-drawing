@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="button-container" id="button-container">
+            <button id="button-draw" class="button" onclick='startDraw()'><img src="assets/svg/draw.svg" /> Draw</button>
+            <button id="button-clear" class="button" onclick='clearCanvas()'><img src="assets/svg/clear-all.svg" /> Clear All</button>
+            <button id="button-select" class="button" onclick='select()'><img src="assets/svg/select.svg" /> Select</button>
+            <button id="button-hex" class="button" onclick='addHex()'><img src="assets/svg/hexagon.svg" /> Hexagon</button>
+            <button id="button-cir" class="button" onclick='addCircle()'><img src="assets/svg/circle.svg" /> Circle</button>
+            <button id="button-tri" class="button" onclick='addTriangle()'><img src="assets/svg/triangle.svg" /> Triangle</button>
+            <button id="button-rec" class="button" onclick='addRect()'><img src="assets/svg/rectangle.svg" /> Rectangle</button>
+            <button id="button-line" class="button" onclick='addSingle()'><img src="assets/svg/single-bond.svg" /> Single Bond</button>
+            <button id="button-line" class="button" onclick='addDouble()'><img src="assets/svg/double-bond.svg" /> Double Bond</button>
+            <button id="button-line" class="button" onclick='addWedge()'><img src="assets/svg/wedge.svg" /> Wedge</button>
+            <button id="button-line" class="button" onclick='addWedgeDash()'><img src="assets/svg/wedge-dash.svg" /> Wedge Dash</button>
+            <button id="button-line" class="button" onclick='addText()'><img src="assets/svg/text.svg" /> Text</button>
+            <br>
+            <div layout="row">
+                <button class="button order" id="toAdelante">+
+            <tooltip md-direction="bottom">Bring forward</tooltip>
+          </button>
+                <button class="button order" id="tofront">++
+            <tooltip md-direction="bottom">Bring to front</tooltip>
+          </button>
+                <button class="button order" id="toAtras">-
+            <tooltip md-direction="bottom">Send backwards</tooltip>
+          </button>
+                <button class="button order" id="toback">--
+            <tooltip md-direction="bottom">Send to back</tooltip>
+          </button>
+            </div>
+
+            <button id="button-save" class="btn btn-secondary" onclick='saveCanvas()' style="display:none;">Save</button>
+
+            <input id="filereader" type="file" accept="image/*" />
+
+            <label for="filereader" class="btn btn-secondary">
+               Upload
+            </label>
+
+
+        </div>
+
+        <canvas id="a" width="600px" height="500"></canvas>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.js" async defer></script>
+    <script src="js/main.js" async defer></script>
+    <script src="js/events.js" async defer></script>
+
+</body>
+
+</html>
