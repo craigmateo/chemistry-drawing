@@ -117,6 +117,7 @@ function addText() {
         top: this.canvas.height / 2,
         fill: 'red',
         fontFamily: 'sans-serif',
+        fontSize: 20,
         hasRotatingPoint: false,
         centerTransform: true,
         originX: 'center',
@@ -141,7 +142,7 @@ jQuery('html').keyup(function(e) {
 function startDraw() {
     mode = "pencil";
     canvas.isDrawingMode = true;
-    canvas.freeDrawingBrush.width = 6;
+    canvas.freeDrawingBrush.width = 3;
     console.log(canvas.freeDrawingBrush);
     fabric.PencilBrush.prototype.globalCompositeOperation = "source-over";
     canvas.renderAll();
@@ -196,66 +197,78 @@ function addWedgeDash() {
     var id = Date.now();
     canvas.isDrawingMode = false;
 
-    var rect = new fabric.Rect({
+    var rect0 = new fabric.Rect({
+        left: 118,
+        top: 80,
+        width: 2,
+        height: 8,
+        fill: 'black',
+        originX: 'left',
+        originY: 'top',
+        scaleY: 0.4,
+        centeredRotation: true
+    });
+
+    var rect1 = new fabric.Rect({
         left: 117,
-        top: 90,
+        top: 88,
+        width: 4,
+        height: 8,
+        fill: 'black',
+        originX: 'left',
+        originY: 'top',
+        scaleY: 0.4,
+        centeredRotation: true
+    });
+
+    var rect2 = new fabric.Rect({
+        left: 116,
+        top: 96,
         width: 6,
         height: 8,
         fill: 'black',
         originX: 'left',
         originY: 'top',
-        scaleY: 0.5,
+        scaleY: 0.4,
         centeredRotation: true
     });
 
-    var rect0 = new fabric.Rect({
-        left: 115,
-        top: 100,
+    var rect3 = new fabric.Rect({
+        left: 114,
+        top: 104,
         width: 10,
         height: 8,
         fill: 'black',
         originX: 'left',
         originY: 'top',
-        scaleY: 0.5,
+        scaleY: 0.4,
         centeredRotation: true
     });
 
-    var rect1 = new fabric.Rect({
-        left: 113,
-        top: 110,
-        width: 15,
+    var rect4 = new fabric.Rect({
+        left: 112,
+        top: 112,
+        width: 14,
         height: 8,
         fill: 'black',
         originX: 'left',
         originY: 'top',
-        scaleY: 0.5,
+        scaleY: 0.4,
         centeredRotation: true
     });
 
-    var rect2 = new fabric.Rect({
+    var rect5 = new fabric.Rect({
         left: 110,
         top: 120,
-        width: 22,
+        width: 18,
         height: 8,
         fill: 'black',
         originX: 'left',
         originY: 'top',
-        scaleY: 0.5,
+        scaleY: 0.4,
         centeredRotation: true
     });
-
-    var rect3 = new fabric.Rect({
-        left: 107,
-        top: 130,
-        width: 30,
-        height: 8,
-        fill: 'black',
-        originX: 'left',
-        originY: 'top',
-        scaleY: 0.5,
-        centeredRotation: true
-    });
-    var rectGroup = new fabric.Group([rect, rect0, rect1, rect2, rect3], {
+    var rectGroup = new fabric.Group([rect0, rect1, rect2, rect3, rect4, rect5], {
         id: id,
         left: this.canvas.width / 2,
         top: this.canvas.height / 2,
@@ -266,6 +279,7 @@ function addWedgeDash() {
 
     this.canvas.add(rectGroup);
 }
+
 
 
 function addSingle() {
@@ -392,8 +406,8 @@ function addWedge() {
         top: this.canvas.height / 2,
         fill: 'black',
         stroke: 'black',
-        width: 20,
-        height: 60,
+        width: 15,
+        height: 43,
         originX: 'center',
         originY: 'center',
         angle: 45,
@@ -401,7 +415,7 @@ function addWedge() {
     }));
 }
 
-/* context menu */
+/* context menu 
 
 const contextMenu = document.getElementById("context-menu");
 const scope = document.querySelector("body");
@@ -422,7 +436,7 @@ scope.addEventListener("click", (e) => {
         contextMenu.classList.remove("visible");
     }
 });
-
+*/
 
 /* create polygon */
 
