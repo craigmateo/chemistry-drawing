@@ -28,7 +28,7 @@ jQuery(window).on("load", function() {
 
         if (mode == "pencil") {
             document.getElementById("button-draw").style.backgroundColor = "darkblue";
-  
+
         } else if (mode == "draw") {
             document.getElementById("button-line").style.backgroundColor = "darkblue";
 
@@ -68,4 +68,28 @@ jQuery(window).on("load", function() {
         }
     });
 
+    canvas.on('text:changed', function(e) {
+        console.log('text:changed', e.target, e.target.text);
+        if (e.target) {
+            let result = getDigits(e.target.text);
+            e.target.set('styles', result);
+            console.log('ActiveObject', canvas.getActiveObject().styles)
+        }
+    });
+
+    function getDigits(string) {
+        strArray = string.split('');
+        var jsonString = '{ "0": {'
+        for (let i = 0; i < strArray.length; i++) {
+            if (isNaN(strArray[i]) == false) {
+                console.log("Number " + strArray[i] + " is at index " + i);
+                jsonString += '"' + i.toString() + '"' + ': { "fontSize": "15" }, ';
+            } else {
+                jsonString += '"' + i.toString() + '"' + ': { "fontSize": "30" }, ';
+            }
+        }
+        var objString = jsonString.slice(0, -2);
+        result = objString + ' } }';
+        return JSON.parse(result);
+    }
 });
