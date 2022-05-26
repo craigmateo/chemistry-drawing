@@ -26,7 +26,11 @@
             <button id="button-line" class="button" onclick='addWedge()' title="Wedge"><img src="assets/svg/wedge.svg" /></button>
             <button id="button-line" class="button" onclick='addWedgeDash()' title="Wedge Dash"><img src="assets/svg/wedge-dash.svg" /></button>
             <button id="button-line" class="button" onclick='addText()' title="Text"><img src="assets/svg/text.svg" /></button>
+            <button id="button-line" class="button" onclick='addArrow()' title="Arrow"><img src="assets/svg/arrow.svg" /></button>
+
+            <!-- button-save for testing: output to console.log -->
             <button id="button-save" class="button" onclick='saveCanvas()' style="display:none;">Save</button>
+
             <input id="filereader" type="file" accept="image/*" />
             <label for="filereader" class="custom-file-upload" title="Upload Image">
                 <img src="assets/svg/image.svg" />
@@ -40,11 +44,24 @@
             <div class="item" id="toback">Send to back</div>
         </div>
 
-        <canvas id="a" width="557px" height="500"></canvas>
+        <canvas id="a" width="599px" height="500"></canvas>
 
     </div>
+
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [
+                    ['$', '$'],
+                    ['\\(', '\\)']
+                ]
+            }
+        };
+    </script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.js" async defer></script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="js/main.js" async defer></script>
     <script src="js/events.js" async defer></script>
 

@@ -11,7 +11,37 @@ jQuery(window).on("load", function() {
     document.getElementById('toback').addEventListener("click", enviarFondo);
     document.getElementById('toAdelante').addEventListener("click", moverAdelante);
     document.getElementById('toAtras').addEventListener("click", enviarAtras);
+    canvas.on('text:changed', function(e) {
+        console.log('text:changed', e.target, e.target.text);
+        let result = getDigits(e.target.text);
+        e.target.set('styles', result);
+        console.log('ActiveObject', canvas.getActiveObject().styles)
+    });
 });
+
+/*  getDigits(str) 
+str = textbox contents
+loops through each char; if it's a digit it assigns style fontSize: 15; else fontSize 30
+returns JSON (styles object) 
+*/
+
+function getDigits(string) {
+    strArray = string.split('');
+    var jsonString = '{ "0": {'
+    for (let i = 0; i < strArray.length; i++) {
+        //Use isNaN() to check if the value is a number.
+        if (isNaN(strArray[i]) == false) {
+            console.log("Number " + strArray[i] + " is at index " + i);
+            jsonString += '"' + i.toString() + '"' + ': { "fontSize": "15" }, ';
+        } else {
+            jsonString += '"' + i.toString() + '"' + ': { "fontSize": "30" }, ';
+        }
+    }
+    var objString = jsonString.slice(0, -2);
+    result = objString + ' } }';
+    //console.log(JSON.parse(result));
+    return JSON.parse(result);
+}
 
 function addHex() {
     4
@@ -112,12 +142,13 @@ function addLine() {
 }
 
 function addText() {
+
     let text = new fabric.IText('Text', {
         left: this.canvas.width / 2,
         top: this.canvas.height / 2,
-        fill: 'red',
+        fill: 'black',
         fontFamily: 'sans-serif',
-        fontSize: 20,
+        fontSize: 30,
         hasRotatingPoint: false,
         centerTransform: true,
         originX: 'center',
@@ -125,6 +156,33 @@ function addText() {
         lockUniScaling: true
     });
     this.canvas.add(text);
+}
+
+function addTextSub() {
+
+    let text = new fabric.IText('H2O', {
+        left: this.canvas.width / 2,
+        top: this.canvas.height / 2,
+        fill: 'black',
+        fontFamily: 'sans-serif',
+        fontSize: 30,
+        hasRotatingPoint: false,
+        centerTransform: true,
+        originX: 'center',
+        originY: 'center',
+        lockUniScaling: true,
+        styles: {
+            0: {
+                1: {
+                    fontWeight: 'bold',
+                    fontSize: 15
+                },
+            }
+        }
+    })
+    this.canvas.add(text);
+
+
 }
 
 jQuery('html').keyup(function(e) {
@@ -414,6 +472,44 @@ function addWedge() {
         strokeWidth: 0
     }));
 }
+
+function addArrow() {
+    mode = "shape";
+    var id = Date.now();
+    canvas.isDrawingMode = false;
+    var triangle = new fabric.Triangle({
+        width: 9,
+        height: 15,
+        fill: 'black',
+        left: 150,
+        top: 137,
+        angle: 90
+    });
+
+    var line = new fabric.Rect({
+        left: 100,
+        top: 140,
+        width: 40,
+        height: 3,
+        fill: 'black',
+        originX: 'left',
+        originY: 'top',
+        centeredRotation: true
+    });
+
+    var arrow = new fabric.Group([line, triangle], {
+        id: id,
+        left: this.canvas.width / 2,
+        top: this.canvas.height / 2,
+        left: 200,
+        top: 200,
+        angle: 0
+    });
+
+    this.canvas.add(arrow);
+
+}
+
 
 /* context menu 
 
