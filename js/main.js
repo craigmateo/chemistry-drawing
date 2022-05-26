@@ -44,8 +44,7 @@ function getDigits(string) {
 }
 
 function addHex() {
-    4
-    mode = "shape";
+    var mode = "shape";
     var id = Date.now();
     var points = regularPolygonPoints(6, 50);
     var myPoly = new fabric.Polygon(points, {

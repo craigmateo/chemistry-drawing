@@ -28,14 +28,14 @@ jQuery(window).on("load", function() {
 
         if (mode == "pencil") {
             document.getElementById("button-draw").style.backgroundColor = "darkblue";
-            document.getElementById("button-line").style.backgroundColor = "";
+  
         } else if (mode == "draw") {
             document.getElementById("button-line").style.backgroundColor = "darkblue";
-            document.getElementById("button-draw").style.backgroundColor = "";
+
 
         } else {
             document.getElementById("button-draw").style.backgroundColor = "";
-            document.getElementById("button-line").style.backgroundColor = "";
+
         }
 
         if (mode == "draw") {
