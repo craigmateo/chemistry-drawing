@@ -1,3 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-fonts" viewBox="0 0 16 16">
-    <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z"/>
+<svg width="16" height="16" fill="white" class="bi bi-fonts" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <defs></defs>
+  <text style="font-family: Arial, sans-serif; font-size: 0.6px; white-space: pre;" transform="matrix(22.923374, 0, 0, 22.599781, -75.982399, -114.981613)" x="3.447" y="5.648">H</text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 0.6px;" x="5.838" y="5.588"> </text>
 </svg>

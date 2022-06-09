@@ -16,7 +16,7 @@ h2 {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 600px;
+    width: 632px;
     margin: auto;
     border-bottom: 2px solid lightgray;
     border-left: 2px solid lightgray;
@@ -33,17 +33,17 @@ h2 {
 .custom-file-upload {
     background-color: #333;
     border: 1px solid grey;
-    padding: 3px 11px;
+    padding: 2px 10px;
     text-transform: uppercase;
     color: white;
-    width: 40px;
-    height: 40px;
+    width: 37px;
+    height: 37px;
     margin-top: 0px;
     cursor: pointer;
 }
 
 .custom-file-upload {
-    padding: 25px 10px 13px 12px;
+    padding: 24px 10px 11px 12px;
 }
 
 .custom-file-upload:hover,
