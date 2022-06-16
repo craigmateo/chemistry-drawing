@@ -11,10 +11,7 @@ jQuery(window).on("load", function() {
     document.getElementById('toback').addEventListener("click", enviarFondo);
     document.getElementById('toAdelante').addEventListener("click", moverAdelante);
     document.getElementById('toAtras').addEventListener("click", enviarAtras);
-
 });
-
-
 
 function addHex() {
     var mode = "shape";
@@ -138,7 +135,7 @@ jQuery('html').keyup(function(e) {
 
     if (e.keyCode == 46) {
 
-            canvas.remove(canvas.getActiveObject());
+        canvas.remove(canvas.getActiveObject());
 
     }
 });
@@ -457,18 +454,28 @@ function addArrow() {
 }
 
 function superScript() {
-	var active = canvas.getActiveObject();
-	if (!active) return;
-	active.setSuperscript();
-	canvas.requestRenderAll();
+    var active = canvas.getActiveObject();
+    if (!active) return;
+    active.setSuperscript();
+    canvas.requestRenderAll();
 }
 
 function subScript() {
-	var active = canvas.getActiveObject();
+    var active = canvas.getActiveObject();
     console.log(active);
-	if (!active) return;
-	active.setSubscript();
-	canvas.requestRenderAll();
+    if (!active) return;
+    active.setSubscript();
+    canvas.requestRenderAll();
+}
+
+function removeScript() {
+    var active = canvas.getActiveObject();
+    if (!active) return;
+    active.setSelectionStyles({
+        fontSize: undefined,
+        deltaY: undefined,
+    });
+    canvas.requestRenderAll();
 }
 
 

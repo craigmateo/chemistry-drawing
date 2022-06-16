@@ -80,6 +80,16 @@ jQuery(window).on("load", function() {
 
     */
 
+    document.body.onkeyup = function(e) {
+        if (e.key == " " ||
+            e.code == "Space" ||
+            e.keyCode == 32
+        ) {
+            console.log("spacebar");
+            removeScript();
+        }
+    }
+
     function getDigits(string) {
         strArray = string.split('');
         var jsonString = '{ "0": {'
