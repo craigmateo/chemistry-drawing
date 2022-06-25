@@ -431,7 +431,7 @@ function addText() {
         centerTransform: true,
         originX: 'center',
         originY: 'center',
-        lockUniScaling: true,
+        lockUniScaling: true
     });
     this.canvas.add(text);
     text.enterEditing();
@@ -447,55 +447,53 @@ function superScript() {
 
 function subScript() {
     var active = canvas.getActiveObject();
-    var positionStart = active.selectionStart;
-    var positionEnd = active.selectionEnd;
-    console.log(positionStart, positionEnd);
-    console.log('ActiveObject', active.styles)
-
-    var jsonString = '{ "0": {';
-    for (let i = positionStart; i < positionEnd; i++) {
-        jsonString += '"' + i.toString() + '"' + ': { "fontSize": "15" }, ';
-    }
-    var objString = jsonString.slice(0, -2);
-    result = objString + ' } }';
-    active.set('styles', result);
-    canvas.requestRenderAll();
-
-
-
-
-}
-
-
-function _subScript() {
     if (!subScriptOn) {
         subScriptOn = true;
-        var active = canvas.getActiveObject();
-
-        var caretPositionStart = active.selectionStart;
-        var caretPositionEnd = active.selectionEnd;
-        console.log(caretPositionStart, caretPositionEnd);
-        console.log('ActiveObject', canvas.getActiveObject().styles)
-
-        active.setSubscript();
+        document.getElementById("button-subscript").style.backgroundColor = "#707070";  
+        let positionStart = active.selectionStart;
+        let positionEnd = active.selectionEnd;
+        let result = setSize(positionStart, positionEnd, '15');
+        active.set('styles', JSON.parse(result));
         canvas.requestRenderAll();
-        document.getElementById("button-subscript").style.backgroundColor = "#707070";
         active.enterEditing();
+
+
     } else {
-        var active = canvas.getActiveObject();
-        console.log('ActiveObject', canvas.getActiveObject().styles)
-        removeScript();
-        canvas.requestRenderAll();
-        document.getElementById("button-subscript").style.backgroundColor = "#333333";
-        document.getElementById('button-subscript').onmouseover = function() {
-            document.getElementById('button-subscript').style.borderColor = "white";
-        }
-        document.getElementById('button-subscript').onmouseout = function() {
-            document.getElementById('button-subscript').style.borderColor = "grey";
-        }
         subScriptOn = false;
+        document.getElementById("button-subscript").style.backgroundColor = "#333333";
+        let positionStart = active.selectionStart;
+        let positionEnd = active.selectionEnd;
+        let result = setSize(positionStart, positionEnd, '30');
+        active.set('styles', JSON.parse(result));
+        canvas.requestRenderAll();
         active.enterEditing();
     }
+}
+
+function setSize(start, end, size) {
+    var obj1 = canvas.getActiveObject().styles;
+        var jsonString = '{ "0": {';
+        for (let i = start; i < end; i++) {
+            jsonString += '"' + i.toString() + '"' + ': { "fontSize": "' + size + '" }, ';
+        }
+        var objString = jsonString.slice(0, -2);
+        result = objString + ' } }';
+        var obj2 = JSON.parse(result);
+        var a = JSON.stringify(obj1["0"]);
+        var b = JSON.stringify(obj2["0"]);
+        if (a !== undefined) {
+            var startString = '{ "0": ';
+            var resultStart = startString + a + "," + b;
+            var objStringNew = resultStart.slice(0, -2);
+            var resultNew = objStringNew + ' } } }';
+        } else {
+            var startString = '{ "0": ';
+            var resultStart = startString + b;
+            var objStringNew = resultStart.slice(0, -2);
+            var resultNew = objStringNew + ' } } }';
+        }   
+        resultNew = resultNew.replace("},{",",");
+        return resultNew;
 }
 
 function removeScript() {

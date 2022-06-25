@@ -35,8 +35,8 @@ jQuery(window).on("load", function() {
         } else {
             document.getElementById("button-draw").style.backgroundColor = "";
 
-        }
-
+        }     
+    
         if (mode == "draw") {
             line = new fabric.Line(points, {
                 strokeWidth: 1,
@@ -65,41 +65,69 @@ jQuery(window).on("load", function() {
         if (line) {
             line.setCoords();
         }
-
+        updateToggle();
+    
     });
 
-    /*
+    document.onkeyup = function(e) {
+          switch (e.keyCode) {
+            case 37:
+                updateToggle();
+            case 39:
+                updateToggle();
+          }
+    }
+    
+    function updateToggle() {
+        if(canvas.getActiveObject() != undefined) {   
+            if(canvas.getActiveObject().get('type')==="i-text") {
+                var active = canvas.getActiveObject();
+                let positionEnd = active.selectionEnd;
+                console.log(positionEnd);
+                var obj1 = canvas.getActiveObject().styles;
+                let index = parseInt(positionEnd)-1;
+                try {
+                    if (obj1["0"][index]["fontSize"] == "15") {
+                            subScriptOn = true;
+                            document.getElementById("button-subscript").style.backgroundColor = "#707070"; 
+                        }
+                    else {
+                            subScriptOn = false;
+                            document.getElementById("button-subscript").style.backgroundColor = "#333333"; 
+                        }
+                    }
+                    catch {
+                        subScriptOn = false;
+                        document.getElementById("button-subscript").style.backgroundColor = "#333333"; 
+                    }
+            }
+        }
+    }
+/*
     canvas.on('text:changed', function(e) {
         console.log('text:changed', e.target, e.target.text);
         if (e.target) {
             let result = getDigits(e.target.text);
             e.target.set('styles', result);
-            console.log('ActiveObject', canvas.getActiveObject().styles)
+            console.log('ActiveObject Styles', canvas.getActiveObject().styles)
         }
     });
 
     */
 
 
+    
 
-
-    document.body.onkeyup = function(e) {
-        if (e.key == " " ||
-            e.code == "Space"
-        ) {
-            console.log("spacebar");
-            removeScript();
-        }
-    }
+    
 
     function getDigits(string) {
         strArray = string.split('');
         var jsonString = '{ "0": {'
         for (let i = 0; i < strArray.length; i++) {
-            if (isNaN(strArray[i]) == false) {
-                console.log("Number " + strArray[i] + " is at index " + i);
+            if (subScriptOn) {
                 jsonString += '"' + i.toString() + '"' + ': { "fontSize": "15" }, ';
-            } else {
+            }
+            else {
                 jsonString += '"' + i.toString() + '"' + ': { "fontSize": "30" }, ';
             }
         }
