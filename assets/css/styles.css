@@ -48,13 +48,13 @@ h2 {
 
 .custom-file-upload:hover,
 .custom-file-upload:focus {
-    background-color: red;
+    border-color: white;
     outline: none;
 }
 
 .button:hover,
 .button:focus {
-    background-color: red;
+    border-color: white;
     outline: none;
 }
 
@@ -146,7 +146,7 @@ body {
 .navbar a:hover,
 .dropdown:hover .dropbtn,
 .file-upload:hover {
-    background-color: red;
+    background-color: darkgrey;
 }
 
 .dropdown-content {

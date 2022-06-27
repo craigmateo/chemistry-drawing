@@ -27,11 +27,10 @@ jQuery(window).on("load", function() {
         var points = [pointer.x, pointer.y, pointer.x, pointer.y];
 
         if (mode == "pencil") {
-            document.getElementById("button-draw").style.backgroundColor = "darkblue";
+            document.getElementById("button-draw").style.backgroundColor = "darkgrey";
 
         } else if (mode == "draw") {
-            document.getElementById("button-line").style.backgroundColor = "darkblue";
-
+            document.getElementById("button-line").style.backgroundColor = "darkgrey";
 
         } else {
             document.getElementById("button-draw").style.backgroundColor = "";
@@ -66,6 +65,7 @@ jQuery(window).on("load", function() {
         if (line) {
             line.setCoords();
         }
+
     });
 
     /*
@@ -80,10 +80,12 @@ jQuery(window).on("load", function() {
 
     */
 
+
+
+
     document.body.onkeyup = function(e) {
         if (e.key == " " ||
-            e.code == "Space" ||
-            e.keyCode == 32
+            e.code == "Space"
         ) {
             console.log("spacebar");
             removeScript();

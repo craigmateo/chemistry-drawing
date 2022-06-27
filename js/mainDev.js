@@ -3,6 +3,9 @@ var line, isDown, mode;
 var selectedId;
 var canvas;
 
+var subScriptOn = false;
+var superScriptOn = false;
+
 jQuery(window).on("load", function() {
     canvas = new fabric.Canvas('a');
     canvas.perPixelTargetFind = true;
@@ -108,35 +111,9 @@ function addLine() {
     mode = "draw";
 }
 
-function addText() {
-    let text = new fabric.IText('H', {
-        left: this.canvas.width / 2,
-        top: this.canvas.height / 2,
-        fill: 'black',
-        fontFamily: 'sans-serif',
-        fontSize: 30,
-        hasRotatingPoint: false,
-        centerTransform: true,
-        originX: 'center',
-        originY: 'center',
-        lockUniScaling: true,
-        styles: {
-            0: {
-                1: {
-                    fontSize: 15
-                },
-            }
-        }
-    });
-    this.canvas.add(text);
-}
-
 jQuery('html').keyup(function(e) {
-
     if (e.keyCode == 46) {
-
         canvas.remove(canvas.getActiveObject());
-
     }
 });
 
@@ -163,7 +140,6 @@ function select() {
 function saveCanvas() {
     getResponse();
 }
-
 
 function enviarFrente() {
     var myObject = canvas.getActiveObject();
@@ -197,7 +173,6 @@ function addWedgeDash() {
     mode = "shape";
     var id = Date.now();
     canvas.isDrawingMode = false;
-
     var rect0 = new fabric.Rect({
         left: 118,
         top: 80,
@@ -281,12 +256,9 @@ function addWedgeDash() {
     this.canvas.add(rectGroup);
 }
 
-
-
 function addSingle() {
     mode = "shape";
     var id = Date.now();
-
     var rect2 = new fabric.Rect({
         left: 100,
         top: 140,
@@ -312,7 +284,6 @@ function addDouble() {
     mode = "shape";
     var id = Date.now();
     canvas.isDrawingMode = false;
-
     var rect2 = new fabric.Rect({
         left: 100,
         top: 140,
@@ -343,7 +314,6 @@ function addDouble() {
         top: 200,
         angle: 0
     });
-
     this.canvas.add(rectGroup);
 }
 
@@ -351,7 +321,6 @@ function addTriple() {
     mode = "shape";
     var id = Date.now();
     canvas.isDrawingMode = false;
-
     var rect2 = new fabric.Rect({
         left: 100,
         top: 140,
@@ -448,9 +417,25 @@ function addArrow() {
         top: 200,
         angle: 0
     });
-
     this.canvas.add(arrow);
+}
 
+function addText() {
+    let text = new fabric.IText('', {
+        left: this.canvas.width / 2,
+        top: this.canvas.height / 2,
+        fill: 'black',
+        fontFamily: 'sans-serif',
+        fontSize: 30,
+        hasRotatingPoint: false,
+        centerTransform: true,
+        originX: 'center',
+        originY: 'center',
+        lockUniScaling: true,
+    });
+    this.canvas.add(text);
+    text.enterEditing();
+    this.canvas.setActiveObject(text);
 }
 
 function superScript() {
@@ -462,10 +447,55 @@ function superScript() {
 
 function subScript() {
     var active = canvas.getActiveObject();
-    console.log(active);
-    if (!active) return;
-    active.setSubscript();
+    var positionStart = active.selectionStart;
+    var positionEnd = active.selectionEnd;
+    console.log(positionStart, positionEnd);
+    console.log('ActiveObject', active.styles)
+
+    var jsonString = '{ "0": {';
+    for (let i = positionStart; i < positionEnd; i++) {
+        jsonString += '"' + i.toString() + '"' + ': { "fontSize": "15" }, ';
+    }
+    var objString = jsonString.slice(0, -2);
+    result = objString + ' } }';
+    active.set('styles', result);
     canvas.requestRenderAll();
+
+
+
+
+}
+
+
+function _subScript() {
+    if (!subScriptOn) {
+        subScriptOn = true;
+        var active = canvas.getActiveObject();
+
+        var caretPositionStart = active.selectionStart;
+        var caretPositionEnd = active.selectionEnd;
+        console.log(caretPositionStart, caretPositionEnd);
+        console.log('ActiveObject', canvas.getActiveObject().styles)
+
+        active.setSubscript();
+        canvas.requestRenderAll();
+        document.getElementById("button-subscript").style.backgroundColor = "#707070";
+        active.enterEditing();
+    } else {
+        var active = canvas.getActiveObject();
+        console.log('ActiveObject', canvas.getActiveObject().styles)
+        removeScript();
+        canvas.requestRenderAll();
+        document.getElementById("button-subscript").style.backgroundColor = "#333333";
+        document.getElementById('button-subscript').onmouseover = function() {
+            document.getElementById('button-subscript').style.borderColor = "white";
+        }
+        document.getElementById('button-subscript').onmouseout = function() {
+            document.getElementById('button-subscript').style.borderColor = "grey";
+        }
+        subScriptOn = false;
+        active.enterEditing();
+    }
 }
 
 function removeScript() {
