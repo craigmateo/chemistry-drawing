@@ -26,7 +26,7 @@ Basic functionality:
 ### Installing
 
 * For [Mobius](https://www.digitaled.com/mobius) (*optional*) , download the zip in the `mobius` subfolder. The import to Mobius will be an html question.
-* 
+  
 ## Version History
 
 * 0.1
