@@ -6,10 +6,6 @@ A web-based drawing tool for chemical structures.
 
 ![](https://github.com/craigmateo/chemistry-drawing/blob/main/assets/screenshot.jpg)
 
-## Text Menu
-
-![](https://github.com/craigmateo/chemistry-drawing/blob/main/assets/screenshot1.jpg)
-
 ## Description
 
 A Javascript based web application for drawing chemical structures. Built using Fabric.js.
@@ -26,13 +22,11 @@ Basic functionality:
 ### Dependencies
 
 * Fabric JS with jQuery (cdn)
-* [Mobius](https://www.digitaled.com/mobius) (*optional*) 
 
 ### Installing
 
-* For Mobius, download the zip in the `mobius` subfolder. The import to Mobius will be an html question.
-* For the text-based menu simply use `index-textMenu.html`.
-
+* For [Mobius](https://www.digitaled.com/mobius) (*optional*) , download the zip in the `mobius` subfolder. The import to Mobius will be an html question.
+* 
 ## Version History
 
 * 0.1

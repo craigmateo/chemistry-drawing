@@ -3,6 +3,9 @@ var line, isDown, mode;
 var selectedId;
 var canvas;
 
+var subScriptOn = false;
+var superScriptOn = false;
+
 jQuery(window).on("load", function() {
     canvas = new fabric.Canvas('a');
     canvas.perPixelTargetFind = true;
@@ -11,10 +14,7 @@ jQuery(window).on("load", function() {
     document.getElementById('toback').addEventListener("click", enviarFondo);
     document.getElementById('toAdelante').addEventListener("click", moverAdelante);
     document.getElementById('toAtras').addEventListener("click", enviarAtras);
-
 });
-
-
 
 function addHex() {
     var mode = "shape";
@@ -111,48 +111,27 @@ function addLine() {
     mode = "draw";
 }
 
-function addText() {
-    let text = new fabric.IText('H2O', {
-        left: this.canvas.width / 2,
-        top: this.canvas.height / 2,
-        fill: 'black',
-        fontFamily: 'sans-serif',
-        fontSize: 30,
-        hasRotatingPoint: false,
-        centerTransform: true,
-        originX: 'center',
-        originY: 'center',
-        lockUniScaling: true,
-        styles: {
-            0: {
-                1: {
-                    fontSize: 15
-                },
-            }
-        }
-    });
-    this.canvas.add(text);
-}
-
 jQuery('html').keyup(function(e) {
-
     if (e.keyCode == 46) {
-        if (canvas.getActiveGroup()) {
-            canvas.getActiveGroup().forEachObject(function(o) { canvas.remove(o) });
-            canvas.discardActiveGroup().renderAll();
-        } else {
-            canvas.remove(canvas.getActiveObject());
-        }
+        canvas.remove(canvas.getActiveObject());
     }
 });
 
 function startDraw() {
+    if (mode != "pencil") {
     mode = "pencil";
+    document.getElementById("button-draw").style.backgroundColor = "#707070";
     canvas.isDrawingMode = true;
     canvas.freeDrawingBrush.width = 3;
     console.log(canvas.freeDrawingBrush);
     fabric.PencilBrush.prototype.globalCompositeOperation = "source-over";
     canvas.renderAll();
+    }
+    else {
+        document.getElementById("button-draw").style.backgroundColor = "#333333";
+        mode = "select";
+        select();
+    }
 }
 
 function clearCanvas() {
@@ -169,7 +148,6 @@ function select() {
 function saveCanvas() {
     getResponse();
 }
-
 
 function enviarFrente() {
     var myObject = canvas.getActiveObject();
@@ -203,7 +181,6 @@ function addWedgeDash() {
     mode = "shape";
     var id = Date.now();
     canvas.isDrawingMode = false;
-
     var rect0 = new fabric.Rect({
         left: 118,
         top: 80,
@@ -287,12 +264,9 @@ function addWedgeDash() {
     this.canvas.add(rectGroup);
 }
 
-
-
 function addSingle() {
     mode = "shape";
     var id = Date.now();
-
     var rect2 = new fabric.Rect({
         left: 100,
         top: 140,
@@ -318,7 +292,6 @@ function addDouble() {
     mode = "shape";
     var id = Date.now();
     canvas.isDrawingMode = false;
-
     var rect2 = new fabric.Rect({
         left: 100,
         top: 140,
@@ -349,7 +322,6 @@ function addDouble() {
         top: 200,
         angle: 0
     });
-
     this.canvas.add(rectGroup);
 }
 
@@ -357,7 +329,6 @@ function addTriple() {
     mode = "shape";
     var id = Date.now();
     canvas.isDrawingMode = false;
-
     var rect2 = new fabric.Rect({
         left: 100,
         top: 140,
@@ -454,9 +425,100 @@ function addArrow() {
         top: 200,
         angle: 0
     });
-
     this.canvas.add(arrow);
+}
 
+function addText() {
+    let text = new fabric.IText('', {
+        left: this.canvas.width / 2,
+        top: this.canvas.height / 2,
+        fill: 'black',
+        fontFamily: 'sans-serif',
+        fontSize: 30,
+        hasRotatingPoint: false,
+        centerTransform: true,
+        originX: 'center',
+        originY: 'center',
+        lockUniScaling: true
+    });
+    this.canvas.add(text);
+    text.enterEditing();
+    this.canvas.setActiveObject(text);
+}
+
+function superScript() {
+    var active = canvas.getActiveObject();
+    if (!superScriptOn) {
+        superScriptOn = true;
+        document.getElementById("button-superscript").style.backgroundColor = "#707070"; 
+        if (!active) return;
+        active.setSuperscript();
+        canvas.requestRenderAll();
+        console.log('ActiveObject Styles', canvas.getActiveObject().styles)
+    } else {
+        superScriptOn = false;
+        document.getElementById("button-superscript").style.backgroundColor = "#333333";
+        removeScript();  
+    }
+}
+
+function subScript() {
+    var active = canvas.getActiveObject();
+    if (!subScriptOn) {
+        subScriptOn = true;
+        document.getElementById("button-subscript").style.backgroundColor = "#707070";  
+        let positionStart = active.selectionStart;
+        let positionEnd = active.selectionEnd;
+        let result = setSize(positionStart, positionEnd, '15');
+        active.set('styles', JSON.parse(result));
+        canvas.requestRenderAll();
+        active.enterEditing();
+    } else {
+        subScriptOn = false;
+        document.getElementById("button-subscript").style.backgroundColor = "#333333";
+        let positionStart = active.selectionStart;
+        let positionEnd = active.selectionEnd;
+        let result = setSize(positionStart, positionEnd, '30');
+        active.set('styles', JSON.parse(result));
+        canvas.requestRenderAll();
+        active.enterEditing();
+    }
+}
+
+function setSize(start, end, size) {
+    var obj1 = canvas.getActiveObject().styles;
+        var jsonString = '{ "0": {';
+        for (let i = start; i < end; i++) {
+            jsonString += '"' + i.toString() + '"' + ': { "fontSize": "' + size + '" }, ';
+        }
+        var objString = jsonString.slice(0, -2);
+        result = objString + ' } }';
+        var obj2 = JSON.parse(result);
+        var a = JSON.stringify(obj1["0"]);
+        var b = JSON.stringify(obj2["0"]);
+        if (a !== undefined) {
+            var startString = '{ "0": ';
+            var resultStart = startString + a + "," + b;
+            var objStringNew = resultStart.slice(0, -2);
+            var resultNew = objStringNew + ' } } }';
+        } else {
+            var startString = '{ "0": ';
+            var resultStart = startString + b;
+            var objStringNew = resultStart.slice(0, -2);
+            var resultNew = objStringNew + ' } } }';
+        }   
+        resultNew = resultNew.replace("},{",",");
+        return resultNew;
+}
+
+function removeScript() {
+    var active = canvas.getActiveObject();
+    if (!active) return;
+    active.setSelectionStyles({
+        fontSize: undefined,
+        deltaY: undefined,
+    });
+    canvas.requestRenderAll();
 }
 
 

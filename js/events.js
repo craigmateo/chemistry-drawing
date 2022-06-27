@@ -25,19 +25,7 @@ jQuery(window).on("load", function() {
         console.log(mode);
         var pointer = canvas.getPointer(o.e);
         var points = [pointer.x, pointer.y, pointer.x, pointer.y];
-
-        if (mode == "pencil") {
-            document.getElementById("button-draw").style.backgroundColor = "darkblue";
-
-        } else if (mode == "draw") {
-            document.getElementById("button-line").style.backgroundColor = "darkblue";
-
-
-        } else {
-            document.getElementById("button-draw").style.backgroundColor = "";
-
-        }
-
+    
         if (mode == "draw") {
             line = new fabric.Line(points, {
                 strokeWidth: 1,
@@ -66,25 +54,78 @@ jQuery(window).on("load", function() {
         if (line) {
             line.setCoords();
         }
+        updateToggle();
+    
     });
 
+    document.onkeyup = function(e) {
+          switch (e.key) {
+            case 'ArrowLeft':
+                updateToggle();
+            case 'ArrowRight':
+                updateToggle(); 
+          }
+          if(canvas.getActiveObject() != undefined) {   
+                if(canvas.getActiveObject().get('type')==="i-text") { 
+                canvas.getActiveObject().enterEditing();
+                    canvas.getActiveObject().hiddenTextarea.focus();
+                }
+            }
+    }
+    
+    function updateToggle() {
+        if(canvas.getActiveObject() != undefined) {   
+            if(canvas.getActiveObject().get('type')==="i-text") { 
+                var active = canvas.getActiveObject();
+                let positionEnd = active.selectionEnd;
+                console.log(positionEnd);
+                var obj1 = canvas.getActiveObject().styles;
+                let index = parseInt(positionEnd)-1;
+                try {
+                    if (obj1["0"][index]["fontSize"] == "15") {
+                            subScriptOn = true;
+                            document.getElementById("button-subscript").style.backgroundColor = "#707070"; 
+                        }
+                    else if (obj1["0"][index]["fontSize"] == "18") {
+                            superScriptOn = true;
+                            document.getElementById("button-superscript").style.backgroundColor = "#707070"; 
+                    }
+                    else {
+                            subScriptOn = false;
+                            document.getElementById("button-subscript").style.backgroundColor = "#333333"; 
+                            document.getElementById("button-superscript").style.backgroundColor = "#333333"; 
+                        }
+                    }
+                    catch {
+                        subScriptOn = false;
+                        document.getElementById("button-subscript").style.backgroundColor = "#333333";
+                        document.getElementById("button-superscript").style.backgroundColor = "#333333"; 
+                    }
+                    
+            }
+        }
+    }
+/*
     canvas.on('text:changed', function(e) {
         console.log('text:changed', e.target, e.target.text);
         if (e.target) {
             let result = getDigits(e.target.text);
             e.target.set('styles', result);
-            console.log('ActiveObject', canvas.getActiveObject().styles)
+            console.log('ActiveObject Styles', canvas.getActiveObject().styles)
         }
     });
+
+    */
+
 
     function getDigits(string) {
         strArray = string.split('');
         var jsonString = '{ "0": {'
         for (let i = 0; i < strArray.length; i++) {
-            if (isNaN(strArray[i]) == false) {
-                console.log("Number " + strArray[i] + " is at index " + i);
+            if (subScriptOn) {
                 jsonString += '"' + i.toString() + '"' + ': { "fontSize": "15" }, ';
-            } else {
+            }
+            else {
                 jsonString += '"' + i.toString() + '"' + ': { "fontSize": "30" }, ';
             }
         }
