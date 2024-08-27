@@ -23,15 +23,6 @@ Basic functionality:
 
 * Fabric JS with jQuery (cdn)
 
-### Installing
-
-* For [Mobius](https://www.digitaled.com/mobius) (*optional*) , download the zip in the `mobius` subfolder. The import to Mobius will be an html question.
-  
-## Version History
-
-* 0.1
-    * Initial Release
-
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details
